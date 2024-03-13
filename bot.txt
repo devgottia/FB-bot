@@ -1,0 +1,38 @@
+const { exec } = require('child_process');
+const path = require('path');
+
+// Function to open Chrome Portable and search a URL
+function openChromePortable(chromePortablePath, url) {
+    // Command to open Chrome Portable with the specified URL
+    const command = `"${chromePortablePath}" "${url}"`;
+
+    // Execute the command
+    exec(command, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`Error: ${stderr}`);
+            return;
+        }
+        console.log(`Chrome Portable at ${chromePortablePath} opened successfully with URL: ${url}`);
+    });
+}
+
+// List of paths to Chrome Portable installations
+const chromePortablePaths = [
+    '/path/to/chrome-portable-1/chrome-portable.exe',
+    '/path/to/chrome-portable-2/chrome-portable.exe',
+    '/path/to/chrome-portable-3/chrome-portable.exe',
+    '/path/to/chrome-portable-4/chrome-portable.exe',
+    '/path/to/chrome-portable-5/chrome-portable.exe'
+];
+
+// Example URL to open
+const urlToSearch = 'https://www.example.com';
+
+// Open the URL in each Chrome Portable installation
+chromePortablePaths.forEach(chromePortablePath => {
+    openChromePortable(chromePortablePath, urlToSearch);
+});
